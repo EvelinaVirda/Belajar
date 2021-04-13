@@ -1,0 +1,42 @@
+<html>
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
+  </script>
+</head>
+<body>
+  <div id="msg"></div>
+  <form method="post" action="">
+    <input type="radio" name="game" value="football"> Football<br />
+    <input type="radio" name="game" value="volleyball"> Volleyball<br />
+    <input type="radio" name="game" value="tennis"> Tennis<br /><br />
+    <input type="submit" name="submit" id="submit">
+  </form>
+</body>
+<script type="text/javascript">
+ $(document).ready(function(){
+  $("#submit").click(function(){
+    var game=$('input[type="radio"]:checked').val();
+    console.log(game);
+    if($('input[type="radio"]:checked').length == "0")
+    {
+      alert("Select any value");
+    }
+    else
+    {
+      $.ajax({
+        type: "POST",
+        url: "ajax-check.php",
+        data: "game="+game,
+        success: function()
+        {
+          $("#msg").addClass('bg');
+          $("#msg").html("value Entered");
+        }
+      });
+    }
+    return false;
+  });
+});
+
+</script>
+</html>
